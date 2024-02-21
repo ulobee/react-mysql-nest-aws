@@ -112,7 +112,9 @@ Using:
 ## Physical Model
 The tool `MySQL Workbench` is used to build the physical model, this tool also helps to generate the Script in SQL.
 
-![Physical Model.png](Abstraction/02_Physical_Model/Physical_Model.png)
+<p align="center">
+<img src="Abstraction/02_Physical_Model/Physical_Model.png"/>
+</p>
 
 Another option is `Enterprise Architect`, it also has similar tools
 
