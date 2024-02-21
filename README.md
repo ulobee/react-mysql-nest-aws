@@ -196,18 +196,27 @@ Another option is `Enterprise Architect`, it also has similar tools
 ****
 #### View Index
 
-![Physical Model.png](Abstraction/01_Views/View_01.png)
+<p align="center">
+<img src="Abstraction/01_Views/View_01.png"/>
+</p>
+
 ****
 #### View when there is no task
 
-![Physical Model.png](Abstraction/01_Views/View_02.png)
+<p align="center">
+<img src="Abstraction/01_Views/View_02.png"/>
+</p>
 
 ****
 #### Selected and Navbar
 
-![Physical Model.png](Abstraction/01_Views/View_10.png)
+<p align="center">
+<img src="Abstraction/01_Views/View_10.png"/>
+</p>
 
 ****
 #### View Update
 
-![Physical Model.png](Abstraction/01_Views/View_09.png)
+<p align="center">
+<img src="Abstraction/01_Views/View_09.png"/>
+</p>
