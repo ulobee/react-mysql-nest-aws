@@ -7,8 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 
-const URI = 'http://localhost:3001'
-
+const URI = process.env.REACT_APP_API_URI
 const CompFormEditTasks = ()=> {
 
 

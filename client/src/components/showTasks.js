@@ -2,7 +2,7 @@ import axios from "axios";
 import {useState,useEffect} from "react";
 import {Link} from "react-router-dom"
 
-const URI = 'http://localhost:3001'
+const URI = process.env.REACT_APP_API_URI
 
 const CompShowTasks =()=> {
 
