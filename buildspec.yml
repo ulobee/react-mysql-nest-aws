@@ -1,0 +1,32 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: "us-east-1"
+    ACCOUNT_ID: "${AWS_ACCOUNT_ID}"
+    FRONTEND_REPO_NAME: "react-frontend"
+    BACKEND_REPO_NAME: "nest-backend"
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker images...
+      # Build Frontend image
+      - docker build -t $FRONTEND_REPO_NAME -f frontend/Dockerfile .
+      - docker tag $FRONTEND_REPO_NAME:latest $ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$FRONTEND_REPO_NAME:latest
+      # Build Backend image
+      - docker build -t $BACKEND_REPO_NAME -f backend/Dockerfile .
+      - docker tag $BACKEND_REPO_NAME:latest $ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$BACKEND_REPO_NAME:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      # Push Frontend image
+      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$FRONTEND_REPO_NAME:latest
+      # Push Backend image
+      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$BACKEND_REPO_NAME:latest
