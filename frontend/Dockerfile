@@ -8,6 +8,9 @@ WORKDIR /app
 COPY client/package*.json ./
 COPY client/ ./
 
+# Set environment variable
+ENV REACT_APP_API_URI=/api/
+
 # Install dependencies and build
 RUN npm install
 RUN npm run build
