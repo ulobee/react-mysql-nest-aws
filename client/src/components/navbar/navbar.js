@@ -13,6 +13,7 @@ function BasicExample() {
                     <Nav className="me-auto">
                         <Nav.Link href="/"><i className="fa-brands fa-react"/></Nav.Link>
                         <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/images">Images</Nav.Link> 
                         <Nav.Link href="https://github.com/FredyGarcia146">Link</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

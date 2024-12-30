@@ -9,6 +9,7 @@ import { TypeTasksModule } from './type_tasks/type_tasks.module';
 import { TasksModule } from './tasks/tasks.module';
 
 import { ConfigModule} from '@nestjs/config';
+import { ImagesModule } from './images/images.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { ConfigModule} from '@nestjs/config';
       synchronize: false
     }),
     TasksModule,
-    TypeTasksModule],
+    TypeTasksModule,
+    ImagesModule],
   controllers: [AppController],
   providers: [AppService],
 })
