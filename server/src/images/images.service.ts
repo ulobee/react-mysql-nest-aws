@@ -14,7 +14,7 @@ export class ImagesService {
     this.s3Client = new S3Client({
       region: this.configService.get('REGION'),
     });
-    this.bucketName = this.configService.get('AWS_S3_BUCKET_NAME');
+    this.bucketName = this.configService.get('BUCKET_NAME');
   }
 
   async uploadImageToS3(file: Buffer, originalFileName: string, contentType: string): Promise<any> {
