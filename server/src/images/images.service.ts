@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { S3Client, PutObjectCommand, ListObjectsV2Command, GetObjectCommand } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import { Readable } from 'stream';
+import { Upload } from '@aws-sdk/lib-storage';
 
 @Injectable()
 export class ImagesService {
@@ -18,30 +19,20 @@ export class ImagesService {
   }
 
   async uploadImageToS3(file: Buffer, originalFileName: string, contentType: string): Promise<any> {
-    const params = {
-      Bucket: this.bucketName,
-      Key: `uploads/${Date.now()}-${originalFileName}`, // Customize your path here
-      Body: file,
-      ContentType: contentType,
-    };
-
+    const upload = new Upload({
+      client: this.s3Client,
+      params: {
+        Bucket: this.bucketName,
+        Key: `uploads/${Date.now()}-${originalFileName}`,
+        Body: file,
+        ContentType: contentType,
+      },
+    });
     try {
-      const command = new PutObjectCommand(params);
-      const response = await this.s3Client.send(command);
-      console.log('Upload successful:', response);
-
-      // Construct the URL of the uploaded image
-      const imageUrl = `https://${this.bucketName}.s3.${this.configService.get('REGION')}.amazonaws.com/${params.Key}`;
-
-      // Return the URL and any other relevant data
-      return {
-        url: imageUrl,
-        key: params.Key,
-        response: response,
-      };
+      const result = await upload.done();
+      return result;
     } catch (error) {
-      console.error('Error uploading to S3:', error);
-      throw new Error('Failed to upload image to S3');
+      throw new Error(`Error uploading to S3: ${error.message}`);
     }
   }
 
