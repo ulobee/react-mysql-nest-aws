@@ -12,7 +12,7 @@ export class ImagesService {
   constructor(private readonly configService: ConfigService) {
     // The SDK will now automatically pick up credentials from the instance's IAM role.
     this.s3Client = new S3Client({
-      region: this.configService.get('AWS_REGION'),
+      region: this.configService.get('REGION'),
     });
     this.bucketName = this.configService.get('AWS_S3_BUCKET_NAME');
   }
@@ -31,7 +31,7 @@ export class ImagesService {
       console.log('Upload successful:', response);
 
       // Construct the URL of the uploaded image
-      const imageUrl = `https://${this.bucketName}.s3.${this.configService.get('AWS_REGION')}.amazonaws.com/${params.Key}`;
+      const imageUrl = `https://${this.bucketName}.s3.${this.configService.get('REGION')}.amazonaws.com/${params.Key}`;
 
       // Return the URL and any other relevant data
       return {
@@ -58,7 +58,7 @@ export class ImagesService {
       }
       const imageUrls = Contents.map(
         (item) =>
-          `https://${this.bucketName}.s3.${this.configService.get('AWS_REGION')}.amazonaws.com/${item.Key}`,
+          `https://${this.bucketName}.s3.${this.configService.get('REGION')}.amazonaws.com/${item.Key}`,
       );
       return imageUrls;
     } catch (error) {
