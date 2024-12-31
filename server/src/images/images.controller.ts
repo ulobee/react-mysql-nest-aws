@@ -9,13 +9,16 @@ import {
   } from '@nestjs/common';
   import { FileInterceptor } from '@nestjs/platform-express';
   import { ImagesService } from './images.service';
+  import * as Multer from 'multer';
   
   @Controller('images')
   export class ImagesController {
     constructor(private readonly imagesService: ImagesService) {}
   
     @Post('upload')
-    @UseInterceptors(FileInterceptor('image'))
+    @UseInterceptors(FileInterceptor('image', {
+      storage: Multer.memoryStorage(),
+    }))
     async uploadImage(@UploadedFile() file: Express.Multer.File) {
       if (!file) {
           throw new Error('No file uploaded');
